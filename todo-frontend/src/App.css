@@ -1,3 +1,11 @@
+html{
+  text-align: center;
+}
+
+button{
+  padding: 5%;
+}
+
 .Flex-Container {
   background-color: #282c34;
   min-height: 100vh;
@@ -10,16 +18,17 @@
 }
 
 #masterList{
+  padding: 2%;
   margin-top: 10px;
   border-radius: 10px;
   color: black;
   display: flex;
   flex-direction: column;
   grid-gap: 5px;
-  padding: 5%;
   background-color: #d7d3cb;
-  width: 50%;
-  text-align: center;
+  min-width: 300px;
+  max-width:max-content;
+  text-align: left;
 }
 
 #masterList--container{
@@ -49,25 +58,52 @@
 }
 
 .masterList--container--elements--listName{
-  line-height: 60px;
+  margin-top: auto;
+  margin-bottom: auto;
+  max-width: 300px;
+  overflow: hidden;
 }
 
-#titleContainer{
+#titleContainerEditing{
   display: flex;
-  grid-gap: 10px;
-  margin: 50px;
+  flex-direction: column;
+  max-width: 300px;
 }
+
+#titleContainerNoEdit{
+  margin-bottom: 50px;
+  line-height: 80px;
+}
+
+#titleContainerNoEdit--buttons{
+  display: flex;
+  justify-content:center;
+}
+
+#titleContainerNoEdit--buttons > button {
+  padding: 30px;
+}
+
+
+
+#titleContainerNoEdit--title{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
 
 #titleChange {
   font-size: 50px;
 }
 
-button{
-  padding: 5%;
-}
+
+
+
 
 .ToDoList{
-  width:100%;
+  width:auto;
 }
 
 .step{
@@ -84,7 +120,7 @@ button{
   padding: 5px;
   color: black;
   word-wrap: break-word;
-  max-width: 60vw;
+  max-width: 20vw;
   text-align: left;
 }
 

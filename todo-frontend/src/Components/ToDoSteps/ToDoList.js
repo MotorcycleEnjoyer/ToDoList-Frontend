@@ -66,12 +66,20 @@ export default function ToDoList({propsObject}) {
       <div className="Flex-Container">
         <h1>
             { propsObject.steps.name === "RENAME ME" ? 
-              <div id="titleContainer">
+              <div id="titleContainerEditing">
                 <input id="titleChange" onChange={titleChange} autoFocus value={title} onKeyDown={waitForEnterKey} placeholder="EnterTitle"></input>
                 <button onClick={submitTitle}>Submit New Title</button>
               </div>
               :
-              <div id="titleContainer"><button onClick={propsObject.returnToMasterList}>MENU</button> <div>{propsObject.steps.name} </div> <button onClick={resetTitle}>EDIT TITLE</button></div>
+              <div id="titleContainerNoEdit">
+
+                <div id="titleContainerNoEdit--buttons">
+                  <button onClick={propsObject.returnToMasterList}>MENU</button>
+                  <button onClick={resetTitle}>EDIT TITLE</button>
+                </div>
+                
+                <p id="titleContainerNoEdit--title">{propsObject.steps.name} </p> 
+              </div>
               
             }
         </h1>
