@@ -54,7 +54,7 @@ export default function MasterList({importList}){
     // MASTER LIST HIGHER FUNCTIONS
     function addToDoList(){
         let newListObject = {
-            name: null,
+            name: "RENAME ME",
             list: []
         }
             setMasterList(prev => [...prev, newListObject])

@@ -49,7 +49,7 @@ export default function ToDoList({propsObject}) {
   
   function resetTitle(){
     setTitle("")
-    propsObject.changeTitle(listIndex, null)
+    propsObject.changeTitle(listIndex, "RENAME ME")
   }
 
   let stepListAsHTML = propsObject.steps.list.map((element, index) => 
@@ -65,7 +65,7 @@ export default function ToDoList({propsObject}) {
   return (
       <div className="Flex-Container">
         <h1>
-            { propsObject.steps.name === null ? 
+            { propsObject.steps.name === "RENAME ME" ? 
               <div>
                 <input id="titleChange" onChange={titleChange} autoFocus value={title} onKeyDown={waitForEnterKey} placeholder="EnterTitle"></input>
                 <button onClick={submitTitle}>Submit New Title</button>
