@@ -32,8 +32,9 @@ export default function MasterList({importList}){
     }
 
     function selectList(event){
-        if(event.target.className==="masterList--container--elements"){
-            let listIndex = event.target.id
+        let clickTarget = event.target
+        if(clickTarget.className ==="masterList--container--elements" || clickTarget.className === "masterList--container--elements--listName"){
+            let listIndex = clickTarget.id.slice(5)
             configureProps(listIndex)
             changeView("toDoList")
         }
@@ -57,7 +58,7 @@ export default function MasterList({importList}){
             name: "RENAME ME",
             list: []
         }
-            setMasterList(prev => [...prev, newListObject])
+            setMasterList(prev => [newListObject, ...prev])
             
             //selectNewListUponCreation()
     }
@@ -99,8 +100,8 @@ export default function MasterList({importList}){
 
 
     const allListsAsHTML = masterList.map((x, index) => 
-    <div className="masterList--container--elements" id={index} onClick={selectList}>
-    <div className="masterList--container--elements--listName">{x.name}</div>
+    <div className="masterList--container--elements" id={"list-" + index} onClick={selectList}>
+    <div className="masterList--container--elements--listName" id={"name-" + index}>{x.name}</div>
     <button type="button" className={"delete-"+index} onClick={removeToDoList}>DELETE</button> 
     </div>)
 
