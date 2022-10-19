@@ -9,24 +9,61 @@
   grid-gap: 10px;
 }
 
+#masterList{
+  margin-top: 10px;
+  border-radius: 10px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+  padding: 5%;
+  background-color: #d7d3cb;
+  width: 50%;
+  text-align: center;
+}
+
 #masterList--container{
-  background-color: red;
+  background-color: #d7d3cb;
   display: flex;
   flex-direction: column;
   text-align: center;
-  grid-gap: 10px;
+  grid-gap: 15px;
 }
 
 .masterList--container--elements{
-  border: 1px solid black;
+  color: #282c34;
+  border: 1px solid #282c34;
+  border-radius: 5px;
   margin: 1px;
-  opacity: 60%;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  padding: 5%;
 }
 
 .masterList--container--elements:hover{
-  opacity: 100%;
-  background-color: darkred;
+  background-color: #282c34;
+  color: white;
   cursor: pointer; 
+  border: 1px solid white;
+}
+
+.masterList--container--elements--listName{
+  line-height: 60px;
+}
+
+#titleContainer{
+  display: flex;
+  grid-gap: 10px;
+  margin: 50px;
+}
+
+#titleChange {
+  font-size: 50px;
+}
+
+button{
+  padding: 5%;
 }
 
 .ToDoList{

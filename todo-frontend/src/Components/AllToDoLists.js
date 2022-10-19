@@ -99,7 +99,8 @@ export default function MasterList({importList}){
 
 
     const allListsAsHTML = masterList.map((x, index) => 
-    <div className="masterList--container--elements" id={index} onClick={selectList}>{x.name}
+    <div className="masterList--container--elements" id={index} onClick={selectList}>
+    <div className="masterList--container--elements--listName">{x.name}</div>
     <button type="button" className={"delete-"+index} onClick={removeToDoList}>DELETE</button> 
     </div>)
 
@@ -108,7 +109,7 @@ export default function MasterList({importList}){
 
     {   view==="masterList" && <div id="masterList">
         <h1>{masterList.length > 0 ? "All ToDo Lists" : "No ToDo Lists"}</h1>
-        <button onClick={addToDoList}>CREATE NEW LIST</button> <br></br>
+        <button id="newToDoListButton" onClick={addToDoList}>CREATE NEW LIST</button> <br></br>
         <div id="masterList--container">
        
             {allListsAsHTML}
