@@ -21,17 +21,21 @@ export default function MasterList({importList}){
         if(masterList.length === listIndex)
             console.log("SHIT DOESN'T EXIST BRO!!!")
         setProps({
-            steps: masterList[listIndex], 
+            masterList_todoList: masterList[listIndex], 
             listIndex: parseInt(listIndex), 
-            returnToMasterList: returnToMasterList, 
-            addStep: addStep,
-            editStep: editStep,
-            removeStep: removeStep,
-            changeTitle: changeStepListName
+            todoListMethods: {
+                editName: masterList_todoList_editName,
+                addStep: masterList_todoList_editName,
+                returnToMenu: changeView_from_todo_to_masterList,
+            },
+            todoStepMethods: {
+                editStep: masterList_todoList_steps_editStep,
+                removeStep: masterList_todoList_steps_removeStep
+            }
         })
     }
 
-    function selectList(event){
+    function changeView_from_masterList_to_selected_todo(event){
         let clickTarget = event.target
         if(clickTarget.className ==="masterList--container--elements" || clickTarget.className === "masterList--container--elements--listName"){
             let listIndex = clickTarget.id.slice(5)
@@ -40,20 +44,11 @@ export default function MasterList({importList}){
         }
     }
 
-    function returnToMasterList(){
+    function changeView_from_todo_to_masterList(){
         changeView("masterList")
     }
 
-
-    function selectNewListUponCreation(){
-
-        let listIndex = masterList.length
-        configureProps(listIndex)
-        changeView("toDoList")
-    }
-
-    // MASTER LIST HIGHER FUNCTIONS
-    function addToDoList(){
+    function  masterList_addToDoList(){
         let newListObject = {
             name: "RENAME ME",
             list: []
@@ -63,33 +58,36 @@ export default function MasterList({importList}){
             //selectNewListUponCreation()
     }
 
-    function removeToDoList(event){
+    function masterList_removeToDoList(event){
         let index = parseInt(event.target.className.substring(7))
         let copyArray = [...masterList]
         copyArray.splice(index, 1)
         setMasterList(copyArray)
     }
 
-    // MASTER LIST, ToDo STEPS
-    function changeStepListName(listIndex, newString){
+    // TODOLIST METHODS
+    function masterList_todoList_editName(listIndex, newString){
         let copyArray = [...masterList]
         copyArray[listIndex].name = newString
         setMasterList(copyArray)
     }
 
-    function addStep(listIndex, newString){
+    function masterList_todoList_addStep(listIndex, newString){
         let copyArray = [...masterList]
         copyArray[listIndex].list.push(newString)
         setMasterList(copyArray)
     }
 
-    function editStep(listIndex, stepIndex, newString){
+
+    // TODO STEP METHODS
+
+    function masterList_todoList_steps_editStep(listIndex, stepIndex, newString){
         let copyArray = [...masterList]
         copyArray[listIndex].list[stepIndex] = newString
         setMasterList(copyArray)
     }
 
-    function removeStep(listIndex, stepIndex){
+    function masterList_todoList_steps_removeStep(listIndex, stepIndex){
         let copyArray = [...masterList]
         let stepListToEdit = copyArray[listIndex].list
         stepListToEdit.splice(stepIndex, 1)
@@ -100,9 +98,9 @@ export default function MasterList({importList}){
 
 
     const allListsAsHTML = masterList.map((x, index) => 
-    <div className="masterList--container--elements" id={"list-" + index} onClick={selectList}>
+    <div className="masterList--container--elements" id={"list-" + index} onClick={changeView_from_masterList_to_selected_todo}>
     <div className="masterList--container--elements--listName" id={"name-" + index}>{x.name}</div>
-    <button type="button" className={"delete-"+index} onClick={removeToDoList}>DELETE</button> 
+    <button type="button" className={"delete-"+index} onClick={masterList_removeToDoList}>DELETE</button> 
     </div>)
 
     return(
@@ -110,7 +108,7 @@ export default function MasterList({importList}){
 
     {   view==="masterList" && <div id="masterList">
         <h1>{masterList.length > 0 ? "All ToDo Lists" : "No ToDo Lists"}</h1>
-        <button id="newToDoListButton" onClick={addToDoList}>CREATE NEW LIST</button> <br></br>
+        <button id="newToDoListButton" onClick={masterList_addToDoList}>CREATE NEW LIST</button> <br></br>
         <div id="masterList--container">
        
             {allListsAsHTML}
@@ -120,7 +118,7 @@ export default function MasterList({importList}){
 
     {
         view==="toDoList" && <div>
-            <ToDoList propsObject={props}/>
+            <ToDoList props={props}/>
         </div>
 
     }
