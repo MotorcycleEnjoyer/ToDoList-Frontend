@@ -21,14 +21,14 @@ export default function MasterList({importList}){
         if(masterList.length === listIndex)
             console.log("SHIT DOESN'T EXIST BRO!!!")
         setProps({
-            masterList_todoList: masterList[listIndex], 
+            toDoList: masterList[listIndex], 
             listIndex: parseInt(listIndex), 
-            todoListMethods: {
-                editName: masterList_todoList_editName,
-                addStep: masterList_todoList_editName,
+            toDoListMethods: {
+                changeTitle: masterList_todoList_editName,
+                addStep: masterList_todoList_addStep,
                 returnToMenu: changeView_from_todo_to_masterList,
             },
-            todoStepMethods: {
+            toDoStepMethods: {
                 editStep: masterList_todoList_steps_editStep,
                 removeStep: masterList_todoList_steps_removeStep
             }
@@ -98,10 +98,11 @@ export default function MasterList({importList}){
 
 
     const allListsAsHTML = masterList.map((x, index) => 
-    <div className="masterList--container--elements" id={"list-" + index} onClick={changeView_from_masterList_to_selected_todo}>
-    <div className="masterList--container--elements--listName" id={"name-" + index}>{x.name}</div>
-    <button type="button" className={"delete-"+index} onClick={masterList_removeToDoList}>DELETE</button> 
-    </div>)
+    <div key={index} className="masterList--container--elements" id={"list-" + index} onClick={changeView_from_masterList_to_selected_todo}>
+        <div className="masterList--container--elements--listName" id={"name-" + index}>{x.name}</div>
+        <button type="button" className={"delete-"+index} onClick={masterList_removeToDoList}>DELETE</button> 
+    </div>
+    )
 
     return(
     <>
@@ -118,7 +119,7 @@ export default function MasterList({importList}){
 
     {
         view==="toDoList" && <div>
-            <ToDoList props={props}/>
+            <ToDoList propsObject={props}/>
         </div>
 
     }

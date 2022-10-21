@@ -42,7 +42,7 @@ export default function ToDoStep(props){
         if(!textIsDifferent){
             return
         }
-        props.edit(props.listIndex, props.index, newStep)
+        props.edit(props.listIndex, props.stepIndex, newStep)
         
     }
 
@@ -53,7 +53,7 @@ export default function ToDoStep(props){
       }
 
     function deleteCurrent(){
-        props.delete(props.listIndex, props.index)
+        props.delete(props.listIndex, props.stepIndex)
         document.getElementById("listInput").focus();
     }
 
@@ -63,12 +63,12 @@ export default function ToDoStep(props){
     }
 
     return(
-        <div className="step" key={props.index}>
+        <div className="step" key={props.stepIndex}>
           {modify === false && <button className='step--delete' onClick={deleteCurrent}>DELETE</button>} 
           {modify === false && <button className='step--edit' onClick={toggleEdit}>EDIT</button>}
           <div className="step--index">
-              {props.index < 9 && "0" }
-              {props.index+1}
+              {props.stepIndex < 9 && "0" }
+              {props.stepIndex+1}
             </div> 
           
           {

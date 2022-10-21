@@ -2,10 +2,8 @@ import ToDoStep from './ToDoStep'
 import React from "react"
 
 export default function ToDoList({propsObject}) {
-
   let [step, setStep] = React.useState("")
   let [listIndex, setListIndex] = React.useState(propsObject.listIndex)
-  let listName = ""
   function writeStep(event){
     setStep(event.target.value)
   }
@@ -14,7 +12,7 @@ export default function ToDoList({propsObject}) {
     if(event.keyCode === 13){
       if(step === "")
         return
-      propsObject.addStep(listIndex, event.target.value)
+      propsObject.toDoListMethods.addStep(listIndex, event.target.value)
       setStep("")
     }
   }
@@ -22,7 +20,7 @@ export default function ToDoList({propsObject}) {
   function addStep(event){
     if(step === "")
       return
-    propsObject.addStep(listIndex, step)
+    propsObject.toDoListMethods.addStep(listIndex, step)
     setStep("")
   }
 
@@ -36,7 +34,7 @@ export default function ToDoList({propsObject}) {
     if(title==="")
       return
 
-    propsObject.changeTitle(listIndex, title)
+    propsObject.toDoListMethods.changeTitle(listIndex, title)
     let input = document.getElementById("listInput")
     input.focus()
   }
@@ -49,23 +47,23 @@ export default function ToDoList({propsObject}) {
   
   function resetTitle(){
     setTitle("")
-    propsObject.changeTitle(listIndex, "RENAME ME")
+    propsObject.toDoListMethods.changeTitle(listIndex, "RENAME ME")
   }
 
-  let stepListAsHTML = propsObject.steps.list.map((element, index) => 
+  let stepListAsHTML = propsObject.toDoList.list.map((element, index) => 
     <ToDoStep 
           key={index} 
           step={element}
           listIndex = {listIndex}
-          index = {index}
-          delete={propsObject.removeStep}
-          edit={propsObject.editStep}
+          stepIndex = {index}
+          delete={propsObject.toDoStepMethods.removeStep}
+          edit={propsObject.toDoStepMethods.editStep}
   />)
 
   return (
       <div className="Flex-Container">
         <h1>
-            { propsObject.steps.name === "RENAME ME" ? 
+            { propsObject.toDoList.name === "RENAME ME" ? 
               <div id="titleContainerEditing">
                 <input id="titleChange" onChange={titleChange} autoFocus value={title} onKeyDown={waitForEnterKey} placeholder="EnterTitle"></input>
                 <button onClick={submitTitle}>Submit New Title</button>
@@ -74,11 +72,11 @@ export default function ToDoList({propsObject}) {
               <div id="titleContainerNoEdit">
 
                 <div id="titleContainerNoEdit--buttons">
-                  <button onClick={propsObject.returnToMasterList}>MENU</button>
+                  <button onClick={propsObject.toDoListMethods.returnToMenu}>MENU</button>
                   <button onClick={resetTitle}>EDIT TITLE</button>
                 </div>
                 
-                <p id="titleContainerNoEdit--title">{propsObject.steps.name} </p> 
+                <p id="titleContainerNoEdit--title">{propsObject.toDoList.name} </p> 
               </div>
               
             }
