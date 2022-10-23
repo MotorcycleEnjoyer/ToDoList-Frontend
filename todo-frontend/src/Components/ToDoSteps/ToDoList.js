@@ -3,7 +3,6 @@ import React from "react"
 
 export default function ToDoList({propsObject}) {
   let [step, setStep] = React.useState("")
-  let [listIndex, setListIndex] = React.useState(propsObject.listIndex)
   function writeStep(event){
     setStep(event.target.value)
   }
@@ -12,7 +11,7 @@ export default function ToDoList({propsObject}) {
     if(event.keyCode === 13){
       if(step === "")
         return
-      propsObject.toDoListMethods.addStep(listIndex, event.target.value)
+      propsObject.toDoListMethods.addStep(propsObject.listIndex, event.target.value)
       setStep("")
     }
   }
@@ -20,7 +19,7 @@ export default function ToDoList({propsObject}) {
   function addStep(event){
     if(step === "")
       return
-    propsObject.toDoListMethods.addStep(listIndex, step)
+    propsObject.toDoListMethods.addStep(propsObject.listIndex, step)
     setStep("")
   }
 
@@ -34,7 +33,7 @@ export default function ToDoList({propsObject}) {
     if(title==="")
       return
 
-    propsObject.toDoListMethods.changeTitle(listIndex, title)
+    propsObject.toDoListMethods.changeTitle(propsObject.listIndex, title)
     let input = document.getElementById("listInput")
     input.focus()
   }
@@ -47,14 +46,14 @@ export default function ToDoList({propsObject}) {
   
   function resetTitle(){
     setTitle("")
-    propsObject.toDoListMethods.changeTitle(listIndex, "RENAME ME")
+    propsObject.toDoListMethods.changeTitle(propsObject.listIndex, "RENAME ME")
   }
 
   let stepListAsHTML = propsObject.toDoList.list.map((element, index) => 
     <ToDoStep 
           key={index} 
           step={element}
-          listIndex = {listIndex}
+          listIndex = {propsObject.listIndex}
           stepIndex = {index}
           delete={propsObject.toDoStepMethods.removeStep}
           edit={propsObject.toDoStepMethods.editStep}
@@ -72,7 +71,7 @@ export default function ToDoList({propsObject}) {
               <div id="titleContainerNoEdit">
 
                 <div id="titleContainerNoEdit--buttons">
-                  <button onClick={propsObject.toDoListMethods.returnToMenu}>MENU</button>
+                  <button className="returnToMenu" onClick={propsObject.toDoListMethods.returnToMenu}>MENU</button>
                   <button onClick={resetTitle}>EDIT TITLE</button>
                 </div>
                 

@@ -48,14 +48,14 @@ export default function MasterList({importList}){
         changeView("masterList")
     }
 
+
+
     function  masterList_addToDoList(){
         let newListObject = {
             name: "RENAME ME",
             list: []
         }
             setMasterList(prev => [newListObject, ...prev])
-            
-            //selectNewListUponCreation()
     }
 
     function masterList_removeToDoList(event){
@@ -65,7 +65,8 @@ export default function MasterList({importList}){
         setMasterList(copyArray)
     }
 
-    // TODOLIST METHODS
+
+
     function masterList_todoList_editName(listIndex, newString){
         let copyArray = [...masterList]
         copyArray[listIndex].name = newString
@@ -79,8 +80,7 @@ export default function MasterList({importList}){
     }
 
 
-    // TODO STEP METHODS
-
+    
     function masterList_todoList_steps_editStep(listIndex, stepIndex, newString){
         let copyArray = [...masterList]
         copyArray[listIndex].list[stepIndex] = newString

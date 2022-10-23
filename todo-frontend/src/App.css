@@ -6,6 +6,19 @@ button{
   padding: 5%;
 }
 
+#newToDoListButton{
+  background-color: lightGreen;
+  border: 1px solid black;
+  font-weight: bold;
+  opacity: 60%;
+  border-radius: 5px;
+}
+
+#newToDoListButton:hover{
+  opacity: 100%;
+  cursor: pointer;
+}
+
 .Flex-Container {
   background-color: #282c34;
   min-height: 100vh;
@@ -99,12 +112,11 @@ button{
 }
 
 
-
-
-
-.ToDoList{
-  width:auto;
+.returnToMenu{
+  
 }
+
+
 
 .step{
   margin: 20px;
@@ -120,8 +132,9 @@ button{
   padding: 5px;
   color: black;
   word-wrap: break-word;
-  max-width: 20vw;
+  max-width: 50vh;
   text-align: left;
+  font-size: calc(10px + 2vmin);
 }
 
 .step--index{
