@@ -3,17 +3,10 @@ import React from "react"
 
 export default function ToDoList({propsObject}) {
   let [step, setStep] = React.useState("")
+  const [title, setTitle] = React.useState("")
+
   function writeStep(event){
     setStep(event.target.value)
-  }
-
-  function submitWithEnter(event){
-    if(event.keyCode === 13){
-      if(step === "")
-        return
-      propsObject.toDoListMethods.addStep(propsObject.listIndex, event.target.value)
-      setStep("")
-    }
   }
 
   function addStep(event){
@@ -23,10 +16,25 @@ export default function ToDoList({propsObject}) {
     setStep("")
   }
 
-  const [title, setTitle] = React.useState("")
+  function submitStepWithEnter(event){
+    if(event.keyCode === 13){
+      if(step === "")
+        return
+      propsObject.toDoListMethods.addStep(propsObject.listIndex, event.target.value)
+      setStep("")
+    }
+  }
 
-  function titleChange(event){
+
+
+  function titleInputOnChangeHandler(event){
     setTitle(event.target.value)
+  }
+
+  function submitIfEnterKey(event){
+    if(event.keyCode===13){
+      submitTitle()
+    }
   }
 
   function submitTitle(){
@@ -36,12 +44,6 @@ export default function ToDoList({propsObject}) {
     propsObject.toDoListMethods.changeTitle(propsObject.listIndex, title)
     let input = document.getElementById("listInput")
     input.focus()
-  }
-
-  function waitForEnterKey(event){
-    if(event.keyCode===13){
-      submitTitle()
-    }
   }
   
   function resetTitle(){
@@ -64,7 +66,7 @@ export default function ToDoList({propsObject}) {
         <h1>
             { propsObject.toDoList.name === "RENAME ME" ? 
               <div id="titleContainerEditing">
-                <input id="titleChange" onChange={titleChange} autoFocus value={title} onKeyDown={waitForEnterKey} placeholder="EnterTitle"></input>
+                <input id="titleChange" onChange={titleInputOnChangeHandler} autoFocus value={title} onKeyDown={submitIfEnterKey} placeholder="EnterTitle"></input>
                 <button onClick={submitTitle}>Submit New Title</button>
               </div>
               :
@@ -87,7 +89,7 @@ export default function ToDoList({propsObject}) {
           type="text"
           onChange={writeStep}
           value={step}
-          onKeyDown={submitWithEnter}
+          onKeyDown={submitStepWithEnter}
           placeholder="NEW STEP"
         />
 

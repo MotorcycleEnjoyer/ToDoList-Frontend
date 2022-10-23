@@ -1,5 +1,3 @@
-// Masterlist object, containing ALL todolists
-
 import React from "react";
 import ToDoList from "./ToDoSteps/ToDoList";
 
@@ -7,15 +5,6 @@ export default function MasterList({importList}){
     const [masterList, setMasterList] = React.useState(importList)
     const [view, setView] = React.useState("masterList")
     const [props, setProps] = React.useState({})
-
-    React.useEffect(()=>{
-        console.log("HOORAH")
-    }, [masterList])
-
-    // NAVIGATION FUNCTIONS
-    function changeView(arg){
-        setView(arg)
-    }
 
     function configureProps(listIndex){
         if(masterList.length === listIndex)
@@ -33,6 +22,12 @@ export default function MasterList({importList}){
                 removeStep: masterList_todoList_steps_removeStep
             }
         })
+    }
+
+
+
+    function changeView(arg){
+        setView(arg)
     }
 
     function changeView_from_masterList_to_selected_todo(event){
@@ -80,7 +75,7 @@ export default function MasterList({importList}){
     }
 
 
-    
+
     function masterList_todoList_steps_editStep(listIndex, stepIndex, newString){
         let copyArray = [...masterList]
         copyArray[listIndex].list[stepIndex] = newString
@@ -97,34 +92,31 @@ export default function MasterList({importList}){
     }
 
 
+
     const allListsAsHTML = masterList.map((x, index) => 
-    <div key={index} className="masterList--container--elements" id={"list-" + index} onClick={changeView_from_masterList_to_selected_todo}>
-        <div className="masterList--container--elements--listName" id={"name-" + index}>{x.name}</div>
-        <button type="button" className={"delete-"+index} onClick={masterList_removeToDoList}>DELETE</button> 
-    </div>
-    )
+        <div key={index} className="masterList--container--elements" id={"list-" + index} onClick={changeView_from_masterList_to_selected_todo}>
+            <div className="masterList--container--elements--listName" id={"name-" + index}>{x.name}</div>
+            <button type="button" className={"delete-"+index} onClick={masterList_removeToDoList}>DELETE</button> 
+        </div>)
 
     return(
     <>
+        {   
+            view==="masterList" && <div id="masterList">
+            <h1>{masterList.length > 0 ? "All ToDo Lists" : "No ToDo Lists"}</h1>
+            <button id="newToDoListButton" onClick={masterList_addToDoList}>CREATE NEW LIST</button> <br></br>
+            <div id="masterList--container">
+                {allListsAsHTML}
+            </div>
+            </div>
+        }
 
-    {   view==="masterList" && <div id="masterList">
-        <h1>{masterList.length > 0 ? "All ToDo Lists" : "No ToDo Lists"}</h1>
-        <button id="newToDoListButton" onClick={masterList_addToDoList}>CREATE NEW LIST</button> <br></br>
-        <div id="masterList--container">
-       
-            {allListsAsHTML}
-        </div>
-        </div>
-    }
+        {
+            view==="toDoList" && <div>
+                <ToDoList propsObject={props}/>
+            </div>
 
-    {
-        view==="toDoList" && <div>
-            <ToDoList propsObject={props}/>
-        </div>
-
-    }
-        
-        
+        }       
     </>
     )
 }

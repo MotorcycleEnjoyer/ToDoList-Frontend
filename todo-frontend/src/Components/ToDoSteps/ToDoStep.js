@@ -37,18 +37,17 @@ export default function ToDoStep(props){
         setNewStep(event.target.value)
     }
 
-    function submit(){
+    function submitStep(){
         toggleEdit()
         if(!textIsDifferent){
             return
         }
         props.edit(props.listIndex, props.stepIndex, newStep)
-        
     }
 
-    function submitWithEnter(event){
+    function submitStepWithEnter(event){
         if(event.keyCode === 13){
-          submit()
+          submitStep()
         }
       }
 
@@ -74,8 +73,8 @@ export default function ToDoStep(props){
           {
           modify === true ? 
             <>
-                <textarea id="step--input" className="step--input" onChange={changeStep} onKeyDown={submitWithEnter} value={newStep}></textarea> 
-                <button onClick={submit} style={style} className="step--edit">{textIsDifferent ? "Submit" : "Cancel"}</button> 
+                <textarea id="step--input" className="step--input" onChange={changeStep} onKeyDown={submitStepWithEnter} value={newStep}></textarea> 
+                <button onClick={submitStep} style={style} className="step--edit">{textIsDifferent ? "Submit" : "Cancel"}</button> 
             </>
           : 
             <p className="step--content" onClick={toggleEdit}>{props.step}</p>
