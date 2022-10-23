@@ -16,7 +16,7 @@ export default function ToDoList({propsObject}) {
     setStep("")
   }
 
-  function submitStepWithEnter(event){
+  function submitStepIfEnterKey(event){
     if(event.keyCode === 13){
       addStep()
     }
@@ -28,7 +28,7 @@ export default function ToDoList({propsObject}) {
     setTitle(event.target.value)
   }
 
-  function submitIfEnterKey(event){
+  function submitTitleIfEnterKey(event){
     if(event.keyCode===13){
       submitTitle()
     }
@@ -63,7 +63,7 @@ export default function ToDoList({propsObject}) {
         <h1>
             { propsObject.toDoList.name === "RENAME ME" ? 
               <div id="titleContainerEditing">
-                <input id="titleChange" onChange={titleInputOnChangeHandler} autoFocus value={title} onKeyDown={submitIfEnterKey} placeholder="EnterTitle"></input>
+                <input id="titleChange" onChange={titleInputOnChangeHandler} autoFocus value={title} onKeyDown={submitTitleIfEnterKey} placeholder="EnterTitle"></input>
                 <button onClick={submitTitle}>Submit New Title</button>
               </div>
               :
@@ -86,7 +86,7 @@ export default function ToDoList({propsObject}) {
           type="text"
           onChange={writeStep}
           value={step}
-          onKeyDown={submitStepWithEnter}
+          onKeyDown={submitStepIfEnterKey}
           placeholder="NEW STEP"
         />
 
