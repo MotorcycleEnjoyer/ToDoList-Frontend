@@ -1,5 +1,5 @@
 import React from "react";
-import ToDoList from "./ToDoSteps/ToDoList";
+import ToDoList from "./ToDo/ToDoList";
 
 export default function MasterList({importList}){
     const [masterList, setMasterList] = React.useState(importList)
