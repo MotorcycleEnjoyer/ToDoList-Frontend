@@ -9,7 +9,7 @@ export default function ToDoList({propsObject}) {
     setStep(event.target.value)
   }
 
-  function addStep(event){
+  function addStep(){
     if(step === "")
       return
     propsObject.toDoListMethods.addStep(propsObject.listIndex, step)
@@ -18,10 +18,7 @@ export default function ToDoList({propsObject}) {
 
   function submitStepWithEnter(event){
     if(event.keyCode === 13){
-      if(step === "")
-        return
-      propsObject.toDoListMethods.addStep(propsObject.listIndex, event.target.value)
-      setStep("")
+      addStep()
     }
   }
 
