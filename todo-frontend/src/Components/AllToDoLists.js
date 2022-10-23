@@ -8,7 +8,7 @@ export default function MasterList({importList}){
 
     function configureProps(listIndex){
         if(masterList.length === listIndex)
-            console.log("SHIT DOESN'T EXIST BRO!!!")
+            console.log("List Index out of bounds")
         setProps({
             toDoList: masterList[listIndex], 
             listIndex: parseInt(listIndex), 
@@ -87,7 +87,6 @@ export default function MasterList({importList}){
         let stepListToEdit = copyArray[listIndex].list
         stepListToEdit.splice(stepIndex, 1)
         copyArray[listIndex].list = stepListToEdit
-        console.log(copyArray[listIndex].list)
         setMasterList(copyArray)
     }
 
