@@ -77,6 +77,10 @@ button{
   overflow: hidden;
 }
 
+.masterList--container--elements > button:hover{
+  background-color: red;
+}
+
 #titleContainerEditing{
   display: flex;
   flex-direction: column;
